@@ -47,7 +47,7 @@ const App: React.FC = () => {
                 }}
               />
             </div>
-            <h1 className="text-white text-2xl font-bold tracking-tight">Novo Cadastro</h1>
+            <h1 className="text-white text-2xl font-bold tracking-tight">Novo Cadastro v2</h1>
           </div>
         </div>
 
