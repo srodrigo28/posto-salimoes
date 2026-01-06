@@ -37,7 +37,7 @@ const App: React.FC = () => {
           <div className="flex flex-col items-center mt-2">
             <div className="bg-white p-3 rounded-xl shadow-sm mb-4" aria-hidden="true">
               <img
-                src="./public/logo.jpeg"
+                src="./assets/logo.jpeg"
                 alt="Logo Solimões"
                 className="h-10 object-contain"
                 onError={(e) => {
