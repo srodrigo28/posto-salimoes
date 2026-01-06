@@ -54,7 +54,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Form Area (Overlapping the red area) */}
-        <main className="flex-1 px-6 mt-8 pb-24 absolute top-[170px] z-10">
+        <main className="flex-1 px-6 mt-8 pb-24 absolute top-[140px] z-10">
           <div className="bg-white rounded-[2rem] shadow-xl p-4 border border-gray-50">
             <RegistrationForm
               formData={formData}
