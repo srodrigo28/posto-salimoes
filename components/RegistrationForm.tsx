@@ -47,19 +47,19 @@ const RegistrationForm: React.FC<FormProps> = ({ formData, setFormData, onSubmit
 
   return (
     <form onSubmit={onSubmit} className="grid grid-cols-2 gap-4">
-      <InputGroup 
-        label="Nome completo" 
-        id="nome" 
-        icon={<User size={20} />} 
+      <InputGroup
+        label="Nome completo"
+        id="nome"
+        icon={<User size={20} />}
         placeholder="Digite seu nome"
         value={formData.nome}
         onChange={(v) => updateField('nome', v)}
       />
-      
-      <InputGroup 
-        label="Data nascimento" 
-        id="nascimento" 
-        icon={<Calendar size={20} />} 
+
+      <InputGroup
+        label="Data nascimento"
+        id="nascimento"
+        icon={<Calendar size={20} />}
         type="date"
         placeholder="00/00/0000"
         value={formData.nascimento}
@@ -67,10 +67,10 @@ const RegistrationForm: React.FC<FormProps> = ({ formData, setFormData, onSubmit
         colSpan="col-span-1"
       />
 
-      <InputGroup 
-        label="WhatsApp" 
-        id="whatsapp" 
-        icon={<Phone size={20} />} 
+      <InputGroup
+        label="WhatsApp"
+        id="whatsapp"
+        icon={<Phone size={20} />}
         type="tel"
         placeholder="(00) 0 0000-0000"
         value={formData.whatsapp}
@@ -78,19 +78,19 @@ const RegistrationForm: React.FC<FormProps> = ({ formData, setFormData, onSubmit
         colSpan="col-span-1"
       />
 
-      <InputGroup 
-        label="Placa do Veículo" 
-        id="placa" 
-        icon={<Car size={20} />} 
+      <InputGroup
+        label="Placa do Veículo"
+        id="placa"
+        icon={<Car size={20} />}
         placeholder="ABC-1234"
         value={formData.placa}
         onChange={(v) => updateField('placa', v)}
       />
 
-      <InputGroup 
-        label="Km Atual" 
-        id="km" 
-        icon={<Gauge size={20} />} 
+      <InputGroup
+        label="Km Atual"
+        id="km"
+        icon={<Gauge size={20} />}
         type="number"
         placeholder="000.000"
         value={formData.km}
@@ -101,7 +101,7 @@ const RegistrationForm: React.FC<FormProps> = ({ formData, setFormData, onSubmit
         type="submit"
         className="col-span-2 mt-4 bg-[#ef4444] text-white py-4 px-6 rounded-full font-bold text-lg flex items-center justify-center gap-3 hover:bg-red-600 active:scale-[0.98] transition-all shadow-lg focus:ring-4 focus:ring-red-200"
       >
-        FINALIZAR CADASTRO
+        ENVIAR
         <ArrowRight size={22} strokeWidth={3} />
       </button>
     </form>
