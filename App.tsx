@@ -28,16 +28,17 @@ const App: React.FC = () => {
         md:rounded-[3rem] md:shadow-2xl overflow-hidden md:overflow-y-auto flex flex-col border-0 border-transparent md:border-black scrollbar-hide">
 
         {/* Top Branding Area (Red) */}
-        <div className="bg-[#ef4444] pt-8 pb-8 px-6 relative rounded-b-[2.5rem] shadow-lg z-5">
+        <div className="bg-[#ef4444] pt-6 pb-6 px-6 relative rounded-b-[2.5rem] shadow-lg z-5">
           <button
             aria-label="Voltar para a página anterior"
-            className="text-white hover:bg-red-600 p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="text-white hover:bg-red-600 p-2 rounded-full transition-colors focus:outline-none 
+            focus:ring-2 focus:ring-white"
           >
             <ArrowLeft size={24} />
           </button>
 
-          <div className="flex flex-col items-center mt-2">
-            <div className="bg-white p-3 rounded-xl shadow-sm mb-4" aria-hidden="true">
+          <div className="flex flex-col items-center mt-0">
+            <div className="bg-white p-3 rounded-xl shadow-sm mb-2" aria-hidden="true">
               <img
                 src={logo}
                 alt="Logo Solimões"
