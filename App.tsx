@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import RegistrationForm from './components/RegistrationForm';
 import BottomNav from './components/BottomNav';
+import logo from './assets/logo.jpeg';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-start md:items-center overflow-x-hidden">
       {/* Container simulating the mobile device shown in the image */}
-      <div className="relative w-full max-w-md bg-white min-h-screen md:min-h-[850px] md:h-[850px] md:rounded-[3rem] md:shadow-2xl overflow-hidden flex flex-col border-8 border-transparent md:border-black">
+      <div className="relative w-full max-w-md bg-white min-h-screen md:h-[850px] md:max-h-[90vh] md:rounded-[3rem] md:shadow-2xl overflow-hidden md:overflow-y-auto flex flex-col border-8 border-transparent md:border-black scrollbar-hide">
 
         {/* Top Branding Area (Red) */}
         <div className="bg-[#ef4444] pt-8 pb-16 px-6 relative rounded-b-[2.5rem] shadow-lg">
@@ -37,7 +38,7 @@ const App: React.FC = () => {
           <div className="flex flex-col items-center mt-2">
             <div className="bg-white p-3 rounded-xl shadow-sm mb-4" aria-hidden="true">
               <img
-                src="./assets/logo.jpeg"
+                src={logo}
                 alt="Logo Solimões"
                 className="h-10 object-contain"
                 onError={(e) => {
