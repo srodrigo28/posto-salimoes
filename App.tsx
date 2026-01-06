@@ -27,7 +27,7 @@ const App: React.FC = () => {
       <div className="relative w-full max-w-md bg-white min-h-screen md:h-[850px] md:max-h-[90vh] md:rounded-[3rem] md:shadow-2xl overflow-hidden md:overflow-y-auto flex flex-col border-8 border-transparent md:border-black scrollbar-hide">
 
         {/* Top Branding Area (Red) */}
-        <div className="bg-[#ef4444] pt-8 pb-16 px-6 relative rounded-b-[2.5rem] shadow-lg">
+        <div className="bg-[#ef4444] pt-8 pb-8 px-6 relative rounded-b-[2.5rem] shadow-lg">
           <button
             aria-label="Voltar para a página anterior"
             className="text-white hover:bg-red-600 p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white"
