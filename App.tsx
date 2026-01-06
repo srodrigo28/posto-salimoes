@@ -24,10 +24,11 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-start md:items-center overflow-x-hidden">
       {/* Container simulating the mobile device shown in the image */}
-      <div className="relative w-full max-w-md bg-white min-h-screen md:h-[850px] md:max-h-[90vh] md:rounded-[3rem] md:shadow-2xl overflow-hidden md:overflow-y-auto flex flex-col border-8 border-transparent md:border-black scrollbar-hide">
+      <div className="relative w-full max-w-md bg-white min-h-screen md:h-[850px] md:max-h-[90vh] 
+        md:rounded-[3rem] md:shadow-2xl overflow-hidden md:overflow-y-auto flex flex-col border-0 border-transparent md:border-black scrollbar-hide">
 
         {/* Top Branding Area (Red) */}
-        <div className="bg-[#ef4444] pt-8 pb-8 px-6 relative rounded-b-[2.5rem] shadow-lg">
+        <div className="bg-[#ef4444] pt-8 pb-8 px-6 relative rounded-b-[2.5rem] shadow-lg z-5">
           <button
             aria-label="Voltar para a página anterior"
             className="text-white hover:bg-red-600 p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white"
@@ -52,8 +53,8 @@ const App: React.FC = () => {
         </div>
 
         {/* Form Area (Overlapping the red area) */}
-        <main className="flex-1 px-6 -mt-8 pb-24">
-          <div className="bg-white rounded-[2rem] shadow-xl p-8 border border-gray-50">
+        <main className="flex-1 px-6 mt-8 pb-24 absolute top-[170px] z-10">
+          <div className="bg-white rounded-[2rem] shadow-xl p-4 border border-gray-50">
             <RegistrationForm
               formData={formData}
               setFormData={setFormData}
