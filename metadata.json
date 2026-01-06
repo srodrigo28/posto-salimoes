@@ -1,0 +1,5 @@
+{
+  "name": "Solimões Cadastro - Acessível",
+  "description": "Uma aplicação de cadastro de veículos altamente acessível com design inspirado na marca Solimões, utilizando React, Tailwind CSS e foco em WCAG.",
+  "requestFramePermissions": []
+}
