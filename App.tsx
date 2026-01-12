@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BottomNav from './components/BottomNav';
 import InstallButton from './components/InstallButton';
 import logo from './assets/logo.jpeg';
+import Splash from './components/Splash';
 
 import Cadastro from './pages/cadastro';
 import Index from './pages/Index';
@@ -15,9 +16,16 @@ type Route = 'index' | 'cadastro' | 'dashboard' | 'abasteca' | 'pontos' | 'perfi
 const App: React.FC = () => {
   const [route, setRoute] = useState<Route>('dashboard');
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowSplash(false), 1200);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-start md:items-center overflow-x-hidden">
+      {showSplash && <Splash />}
       <div className="relative w-full max-w-md bg-white min-h-screen md:h-[850px] md:max-h-[90vh] 
         md:rounded-[3rem] md:shadow-2xl overflow-hidden md:overflow-y-auto flex flex-col border-0 border-transparent md:border-black scrollbar-hide">
 
