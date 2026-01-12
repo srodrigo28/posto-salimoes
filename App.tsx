@@ -16,12 +16,26 @@ type Route = 'index' | 'cadastro' | 'dashboard' | 'abasteca' | 'pontos' | 'perfi
 const App: React.FC = () => {
   const [route, setRoute] = useState<Route>('dashboard');
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('solimoes_seen_splash') !== '1';
+    } catch (e) {
+      return true;
+    }
+  });
 
   useEffect(() => {
-    const t = setTimeout(() => setShowSplash(false), 1200);
+    if (!showSplash) return;
+    const t = setTimeout(() => {
+      setShowSplash(false);
+      try {
+        localStorage.setItem('solimoes_seen_splash', '1');
+      } catch (e) {
+        /* ignore */
+      }
+    }, 1200);
     return () => clearTimeout(t);
-  }, []);
+  }, [showSplash]);
 
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-start md:items-center overflow-x-hidden">
