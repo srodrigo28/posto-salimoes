@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { User, Car, Calendar, Droplet, DollarSign } from 'lucide-react';
+import { IMaskInput } from 'react-imask';
+import AbastecaModal from '../components/AbastecaModal';
 
 const Abasteca: React.FC = () => {
   const [cliente, setCliente] = useState('Jhonathan Silva');
@@ -9,6 +12,9 @@ const Abasteca: React.FC = () => {
   const [valor, setValor] = useState('');
 
   const [litrosError, setLitrosError] = useState<string | null>(null);
+  const [valorError, setValorError] = useState<string | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalPoints, setModalPoints] = useState(0);
 
   useEffect(() => {
     const today = new Date();
@@ -24,12 +30,38 @@ const Abasteca: React.FC = () => {
     const normalized = only.replace(/,/g, '.');
     const num = parseFloat(normalized);
     if (Number.isNaN(num)) return '';
-    return num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    // always show two decimals, comma as separator
+    return num.toFixed(2).replace('.', ',');
   };
 
   const handleValorChange = (value: string) => {
-    const formatted = formatCurrency(value);
-    setValor(formatted);
+    // Allow progressive integer typing: typing digits builds the integer part
+    const raw = value.replace(/[^0-9,\.]/g, '');
+    if (raw === '') {
+      setValor('');
+      setValorError(null);
+      return;
+    }
+
+    // If user typed a decimal separator, parse as float
+    if (/[\.,]/.test(raw)) {
+      const normalized = raw.replace(/,/g, '.');
+      const num = parseFloat(normalized);
+      if (Number.isNaN(num)) return;
+      if (num > 500) setValorError('Valor máximo R$ 500,00');
+      else setValorError(null);
+      setValor(num.toFixed(2).replace('.', ','));
+      return;
+    }
+
+    // Otherwise treat as integer part typed progressively
+    const onlyDigits = raw.replace(/\D/g, '');
+    // limit to 3 digits for integer part (max 500)
+    const intPart = onlyDigits.slice(0, 3);
+    const num = parseInt(intPart || '0', 10);
+    if (!Number.isNaN(num) && num > 500) setValorError('Valor máximo R$ 500,00');
+    else setValorError(null);
+    setValor(`${num.toString()},00`);
   };
 
   const handleLitrosChange = (value: string) => {
@@ -67,7 +99,7 @@ const Abasteca: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const litrosNum = parseFloat(litros.replace(',', '.')) || 0;
-    const valorNum = Number((valor || '').replace(/[^0-9,\.]/g, '').replace(/,/g, '.')) || 0;
+    const valorNum = parseFloat((valor || '').replace(/,/g, '.')) || 0;
 
     if (litrosNum <= 0) {
       setLitrosError('Informe a quantidade de litros');
@@ -77,8 +109,17 @@ const Abasteca: React.FC = () => {
       setLitrosError('Máximo permitido: 120 litros');
       return;
     }
+    if (valorNum > 500) {
+      setValorError('Valor máximo R$ 500,00');
+      return;
+    }
 
-    alert(`Abastecimento registrado: ${cliente} — ${placa} — ${data} — R$ ${valorNum.toFixed(2).replace('.', ',')} — ${litrosNum} L. +10 pontos`);
+    const pointsGenerated = 100;
+    setModalPoints(pointsGenerated);
+    setModalVisible(true);
+    // auto-close after 600 seconds (600000 ms)
+    setTimeout(() => setModalVisible(false), 600000);
+
     setLitros('');
     setValor('');
   };
@@ -92,32 +133,46 @@ const Abasteca: React.FC = () => {
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Cliente</label>
           <div className="flex items-center gap-3">
-            <div className="text-2xl">👤</div>
-            <input value={cliente} onChange={(e) => setCliente(e.target.value)} className="flex-1 p-3 rounded-xl border" />
+            <User size={24} className="text-gray-600" />
+            <input value={cliente} readOnly aria-readonly className="flex-1 p-3 rounded-xl border bg-gray-50" />
           </div>
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Placa</label>
           <div className="flex items-center gap-3">
-            <div className="text-2xl">🚗</div>
-            <input value={placa} onChange={(e) => handlePlacaChange(e.target.value)} className="flex-1 p-3 rounded-xl border" />
+            <Car size={24} className="text-gray-600" />
+            <input value={placa} readOnly aria-readonly className="flex-1 p-3 rounded-xl border bg-gray-50" />
           </div>
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Data</label>
           <div className="flex items-center gap-3">
-            <div className="text-2xl">📅</div>
-            <input type="date" value={data} onChange={(e) => setData(e.target.value)} className="flex-1 p-3 rounded-xl border" />
+            <Calendar size={24} className="text-gray-600" />
+            <input type="date" value={data} readOnly aria-readonly className="flex-1 p-3 rounded-xl border bg-gray-50" />
           </div>
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Litros</label>
           <div className="flex items-center gap-3">
-            <div className="text-2xl">💧</div>
-            <input value={litros} onChange={(e) => handleLitrosChange(e.target.value)} placeholder="0,00" className="flex-1 p-3 rounded-xl border" />
+            <Droplet size={24} className="text-gray-600" />
+            <IMaskInput
+              mask={Number}
+              radix="," 
+              thousandsSeparator="."
+              scale={2}
+              mapToRadix={["."]}
+              padFractionalZeros={true}
+              normalizeZeros={true}
+              min={0}
+              max={120}
+              value={litros}
+              onAccept={(val: any) => handleLitrosChange(String(val))}
+              placeholder="0,00"
+              className="flex-1 p-3 rounded-xl border"
+            />
           </div>
           {litrosError && <p className="text-xs text-red-500 mt-1">{litrosError}</p>}
         </div>
@@ -125,13 +180,31 @@ const Abasteca: React.FC = () => {
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Valor</label>
           <div className="flex items-center gap-3">
-            <div className="text-2xl">💵</div>
-            <input value={valor} onChange={(e) => handleValorChange(e.target.value)} placeholder="R$ 0,00" className="flex-1 p-3 rounded-xl border" />
+            <DollarSign size={24} className="text-gray-600" />
+            <div className="flex items-center gap-2 flex-1">
+              <IMaskInput
+                mask={Number}
+                radix="," 
+                thousandsSeparator="."
+                scale={2}
+                mapToRadix={["."]}
+                padFractionalZeros={true}
+                normalizeZeros={true}
+                min={0}
+                max={500}
+                value={valor}
+                onAccept={(val: any) => handleValorChange(String(val))}
+                placeholder="0,00"
+                className="flex-1 p-3 rounded-xl border"
+              />
+            </div>
           </div>
+          {valorError && <p className="text-xs text-red-500 mt-1">{valorError}</p>}
         </div>
 
         <button type="submit" className="w-full bg-[#ef4444] text-white py-3 rounded-full font-bold">Registrar Abastecimento</button>
       </form>
+      <AbastecaModal visible={modalVisible} points={modalPoints} onClose={() => setModalVisible(false)} />
     </section>
   );
 };

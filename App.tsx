@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
 import BottomNav from './components/BottomNav';
 import logo from './assets/logo.jpeg';
 
@@ -8,13 +7,12 @@ import Cadastro from './pages/cadastro';
 import Index from './pages/Index';
 import Dashboard from './pages/Dashboard';
 import Abasteca from './pages/Abasteca';
-import Pontos from './pages/Pontos';
 import Perfil from './pages/Perfil';
 
 type Route = 'index' | 'cadastro' | 'dashboard' | 'abasteca' | 'pontos' | 'perfil';
 
 const App: React.FC = () => {
-    const [route, setRoute] = useState<Route>('index');
+  const [route, setRoute] = useState<Route>('dashboard');
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
@@ -24,15 +22,6 @@ const App: React.FC = () => {
 
         {/* Top Branding Area (Red) */}
         <div className="bg-[#ef4444] pt-6 pb-6 px-6 relative rounded-b-[2.5rem] shadow-lg z-5">
-          <button
-            aria-label="Ir para a tela inicial"
-            className="text-white hover:bg-red-600 p-2 rounded-full transition-colors focus:outline-none 
-            focus:ring-2 focus:ring-white"
-            onClick={() => setRoute('index')}
-          >
-            <ArrowLeft size={24} />
-          </button>
-
           <div className="flex flex-col items-center mt-0">
             <div className="bg-white p-3 rounded-xl shadow-sm mb-2" aria-hidden="true">
               <img
@@ -68,9 +57,9 @@ const App: React.FC = () => {
               />
             )}
 
-            {route === 'dashboard' && <Dashboard />}
+            {route === 'dashboard' && <Index />}
             {route === 'abasteca' && <Abasteca />}
-            {route === 'pontos' && <Pontos />}
+            {route === 'pontos' && <Dashboard />}
             {route === 'perfil' && <Perfil />}
           </div>
         </main>

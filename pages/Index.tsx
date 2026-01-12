@@ -1,4 +1,5 @@
 import React from 'react';
+import { Droplet, Star } from 'lucide-react';
 
 type Props = {
   isLoggedIn?: boolean;
@@ -14,8 +15,9 @@ const Index: React.FC<Props> = ({ isLoggedIn = false, onPrimaryAction }) => {
       </div>
 
       <div className="flex flex-col items-center gap-4">
-        <div className="w-28 h-28 rounded-full bg-gradient-to-b from-yellow-50 to-white flex items-center justify-center shadow-md text-4xl">
-          ⛽️
+        
+        <div className="w-28 h-28 rounded-full bg-gradient-to-b from-yellow-50 to-white flex items-center justify-center shadow-md">
+          <Droplet size={48} className="text-[#ef4444]" />
         </div>
 
         <h3 className="text-lg font-semibold">Abasteça e Ganhe</h3>
@@ -25,7 +27,7 @@ const Index: React.FC<Props> = ({ isLoggedIn = false, onPrimaryAction }) => {
           onClick={onPrimaryAction}
           className="mt-4 px-6 py-3 bg-[#ef4444] text-white rounded-full font-bold flex items-center gap-3"
         >
-          <span className="text-xl">✨</span>
+          <Star size={18} />
           {isLoggedIn ? 'Registrar novo abastecimento' : 'Faça seu cadastro para começar'}
         </button>
       </div>
