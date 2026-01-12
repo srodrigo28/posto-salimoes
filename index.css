@@ -7,3 +7,37 @@
 input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
 }
+
+/* Scrollable form styling */
+.scrollable-form {
+    max-height: 56vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 8px;
+}
+
+/* WebKit custom scrollbar */
+.scrollable-form::-webkit-scrollbar {
+    width: 10px;
+}
+.scrollable-form::-webkit-scrollbar-track {
+    background: transparent;
+}
+.scrollable-form::-webkit-scrollbar-thumb {
+    background: rgba(239,68,68,0.15); /* subtle red */
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+.scrollable-form::-webkit-scrollbar-thumb:hover {
+    background: rgba(239,68,68,0.28);
+}
+
+/* Firefox scrollbar */
+.scrollable-form {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(239,68,68,0.15) transparent;
+}
+
+/* Ensure inputs don't expand when scroll appears */
+.scrollable-form input { box-sizing: border-box; }
