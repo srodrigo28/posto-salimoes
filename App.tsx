@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import BottomNav from './components/BottomNav';
+import InstallButton from './components/InstallButton';
 import logo from './assets/logo.jpeg';
 
 import Cadastro from './pages/cadastro';
@@ -69,6 +70,7 @@ const App: React.FC = () => {
           </div>
         </main>
 
+        <InstallButton />
         <BottomNav activeRoute={route} onNavigate={(r) => setRoute(r as Route)} />
 
         <div className="sr-only" role="status" aria-live="polite">
