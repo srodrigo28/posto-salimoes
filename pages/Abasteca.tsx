@@ -138,50 +138,29 @@ const Abasteca: React.FC = () => {
           </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Placa</label>
-          <div className="flex items-center gap-3">
-            <Car size={24} className="text-gray-600" />
-            <input value={placa} readOnly aria-readonly className="flex-1 p-3 rounded-xl border bg-gray-50" />
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="sm:w-1/2 w-full min-w-0">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Placa</label>
+            <div className="flex items-center gap-3 min-w-0">
+              <Car size={24} className="text-gray-600" />
+              <input value={placa} readOnly aria-readonly className="w-full min-w-0 p-3 rounded-xl border bg-gray-50" />
+            </div>
+          </div>
+
+          <div className="sm:w-1/2 w-full min-w-0">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Data</label>
+            <div className="flex items-center gap-3 min-w-0">
+              <Calendar size={24} className="text-gray-600" />
+              <input type="date" value={data} readOnly aria-readonly className="w-full min-w-0 p-3 rounded-xl border bg-gray-50" />
+            </div>
           </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Data</label>
-          <div className="flex items-center gap-3">
-            <Calendar size={24} className="text-gray-600" />
-            <input type="date" value={data} readOnly aria-readonly className="flex-1 p-3 rounded-xl border bg-gray-50" />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Litros</label>
-          <div className="flex items-center gap-3">
-            <Droplet size={24} className="text-gray-600" />
-            <IMaskInput
-              mask={Number}
-              radix="," 
-              thousandsSeparator="."
-              scale={2}
-              mapToRadix={["."]}
-              padFractionalZeros={true}
-              normalizeZeros={true}
-              min={0}
-              max={120}
-              value={litros}
-              onAccept={(val: any) => handleLitrosChange(String(val))}
-              placeholder="0,00"
-              className="flex-1 p-3 rounded-xl border"
-            />
-          </div>
-          {litrosError && <p className="text-xs text-red-500 mt-1">{litrosError}</p>}
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Valor</label>
-          <div className="flex items-center gap-3">
-            <DollarSign size={24} className="text-gray-600" />
-            <div className="flex items-center gap-2 flex-1">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="sm:w-1/2 w-full min-w-0">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Litros</label>
+            <div className="flex items-center gap-3 min-w-0">
+              <Droplet size={24} className="text-gray-600" />
               <IMaskInput
                 mask={Number}
                 radix="," 
@@ -191,15 +170,40 @@ const Abasteca: React.FC = () => {
                 padFractionalZeros={true}
                 normalizeZeros={true}
                 min={0}
-                max={500}
-                value={valor}
-                onAccept={(val: any) => handleValorChange(String(val))}
+                max={120}
+                value={litros}
+                onAccept={(val: any) => handleLitrosChange(String(val))}
                 placeholder="0,00"
-                className="flex-1 p-3 rounded-xl border"
+                className="w-full min-w-0 p-3 rounded-xl border"
               />
             </div>
+            {litrosError && <p className="text-xs text-red-500 mt-1">{litrosError}</p>}
           </div>
-          {valorError && <p className="text-xs text-red-500 mt-1">{valorError}</p>}
+
+          <div className="sm:w-1/2 w-full min-w-0">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Valor</label>
+            <div className="flex items-center gap-3 min-w-0">
+              <DollarSign size={24} className="text-gray-600" />
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                <IMaskInput
+                  mask={Number}
+                  radix="," 
+                  thousandsSeparator="."
+                  scale={2}
+                  mapToRadix={["."]}
+                  padFractionalZeros={true}
+                  normalizeZeros={true}
+                  min={0}
+                  max={500}
+                  value={valor}
+                  onAccept={(val: any) => handleValorChange(String(val))}
+                  placeholder="0,00"
+                  className="w-full min-w-0 p-3 rounded-xl border"
+                />
+              </div>
+            </div>
+            {valorError && <p className="text-xs text-red-500 mt-1">{valorError}</p>}
+          </div>
         </div>
 
         <button type="submit" className="w-full bg-[#ef4444] text-white py-3 rounded-full font-bold">Registrar Abastecimento</button>
