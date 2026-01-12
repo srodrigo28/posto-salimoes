@@ -13,7 +13,7 @@ type Route = 'index' | 'cadastro' | 'dashboard' | 'abasteca' | 'pontos' | 'perfi
 
 const App: React.FC = () => {
   const [route, setRoute] = useState<Route>('dashboard');
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-start md:items-center overflow-x-hidden">
@@ -57,7 +57,12 @@ const App: React.FC = () => {
               />
             )}
 
-            {route === 'dashboard' && <Index />}
+            {route === 'dashboard' && (
+              <Index
+                isLoggedIn={isLoggedIn}
+                onPrimaryAction={() => setRoute(isLoggedIn ? 'abasteca' : 'cadastro')}
+              />
+            )}
             {route === 'abasteca' && <Abasteca />}
             {route === 'pontos' && <Dashboard />}
             {route === 'perfil' && <Perfil />}

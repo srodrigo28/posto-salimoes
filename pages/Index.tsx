@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Droplet, Star } from 'lucide-react';
 
 type Props = {
@@ -6,7 +6,23 @@ type Props = {
   onPrimaryAction?: () => void;
 };
 
+
+type Route = 'index' | 'cadastro' | 'dashboard' | 'abasteca' | 'pontos' | 'perfil';
+
 const Index: React.FC<Props> = ({ isLoggedIn = false, onPrimaryAction }) => {
+
+  const [route, setRoute] = useState<Route>('dashboard');
+
+  const handlePrimaryAction = () => {
+    if (onPrimaryAction) {
+      onPrimaryAction();
+      return;
+    }
+    // Update local route state (if other parts of the app use it)
+    setRoute('cadastro');
+    // Perform navigation to the cadastro page
+    window.location.href = '/cadastro';
+  };
   return (
     <section className="text-center">
       <div className="py-6">
@@ -24,10 +40,10 @@ const Index: React.FC<Props> = ({ isLoggedIn = false, onPrimaryAction }) => {
         <p className="text-sm text-gray-500 max-w-xs">Registre seus abastecimentos e transforme consumo em pontos.</p>
 
         <button
-          onClick={onPrimaryAction}
+          onClick={handlePrimaryAction}
           className="mt-4 px-6 py-3 bg-[#ef4444] text-white rounded-full font-bold flex items-center gap-3"
         >
-          <Star size={18} />
+          <Star size={18}  />
           {isLoggedIn ? 'Registrar novo abastecimento' : 'Faça seu cadastro para começar'}
         </button>
       </div>

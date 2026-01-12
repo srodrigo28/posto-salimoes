@@ -126,7 +126,7 @@ const Abasteca: React.FC = () => {
 
   return (
     <section>
-      <h2 className="text-xl font-bold mb-2">Abasteça e Ganhe</h2>
+      <h2 className="text-xl font-bold mb-2 mt-2">Abasteça e Ganhe</h2>
       <p className="text-sm text-gray-500 mb-4">Registre rapidamente seu abastecimento e ganhe pontos.</p>
 
       <form onSubmit={handleSubmit} className="space-y-3">
